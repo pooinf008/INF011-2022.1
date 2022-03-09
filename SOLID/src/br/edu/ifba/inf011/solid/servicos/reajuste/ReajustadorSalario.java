@@ -21,14 +21,16 @@ public class ReajustadorSalario {
 	}
 	
 	
-	public void reajustar(Funcionario funcionario, BigDecimal indice) throws ValidacaoException {
+	public void reajustar(Reajustavel funcionario, BigDecimal indice) throws ValidacaoException {
 		 
 		for(Regra r : this.regras)
 			r.validar(funcionario, indice);
 		
 		BigDecimal salarioCorrigido = funcionario.getSalario().multiply(indice);
 		salarioCorrigido = salarioCorrigido.add(funcionario.getSalario());
+		
 		funcionario.reajustar(salarioCorrigido, LocalDate.now());
+		
 	}
 
 

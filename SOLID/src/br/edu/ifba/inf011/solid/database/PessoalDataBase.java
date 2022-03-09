@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.edu.ifba.inf011.solid.model.Cargo;
 import br.edu.ifba.inf011.solid.model.Funcionario;
 import br.edu.ifba.inf011.solid.model.Terceirizado;
 
@@ -24,8 +25,8 @@ public class PessoalDataBase {
 		
 		
 	public void carregar() {
-		Funcionario erich = new Funcionario("ERICH GAMMA", "001", "11111111111", new BigDecimal(10000), LocalDate.of(2020, 12, 01));
-		Funcionario helm = new Funcionario("RICHARD HELM", "002", "22222222222", new BigDecimal(12000), LocalDate.of(2020, 12, 01));
+		Funcionario erich = new Funcionario("ERICH GAMMA", "001", "11111111111", new BigDecimal(10000), LocalDate.of(2020, 12, 01), Cargo.TRAINEE);
+		Funcionario helm = new Funcionario("RICHARD HELM", "002", "22222222222", new BigDecimal(12000), LocalDate.of(2020, 12, 01), Cargo.SENIOR);
 		Funcionario ralph = new Funcionario("RALPH JOHNSON", "003", "33333333333", new BigDecimal(11000));
 		Funcionario john = new Funcionario("JOHN VLISSIDES", "004", "44444444444", new BigDecimal(15000));
 		Terceirizado bob = new Terceirizado("UNCLE BOB", "005", "55555555555", new BigDecimal(20000), LocalDate.of(2020, 12, 01), "OO COMPANY");		

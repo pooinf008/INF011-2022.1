@@ -5,26 +5,35 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import br.edu.ifba.inf011.solid.ValidacaoException;
+import br.edu.ifba.inf011.solid.servicos.reajuste.Reajustavel;
 
-public class Funcionario {
+public class Funcionario implements Reajustavel{
+
 	
 	private FichaFuncional ficha;
-	
+	private Cargo cargo;
+
 	public Funcionario(String nome, String matricula, String cpf,
 					   BigDecimal salario) {
-		this(nome, matricula, cpf, salario, LocalDate.now());
+		this(nome, matricula, cpf, salario, LocalDate.now(), Cargo.TRAINEE);
 	}
 	
 	public Funcionario(String nome, String matricula, String cpf,
-			   BigDecimal salario, LocalDate dataUltimoReajuste) {
+			   BigDecimal salario, LocalDate dataUltimoReajuste, Cargo cargo) {
 			this.ficha = new FichaFuncional(nome, matricula, cpf,
 											salario, dataUltimoReajuste);
+			this.cargo = cargo;
 	}	
+	
+	public void promover() {
+		this.cargo = this.cargo.proximo();
+	}
 	
 	
 	public String getNome() {
 		return this.ficha.getNome();
 	}
+	
 	public String getCpf() {
 		return this.ficha.getCpf();
 	}
@@ -55,7 +64,11 @@ public class Funcionario {
 	@Override
 	public String toString() {
 		return "Funcionario [nome=" + this.getNome() + ", cpf=" + this.getCpf() + ", salario=" + this.getSalario() + ", dataUltimoReajuste="
-				+ this.getDataUltimoReajuste() + "]";
+				+ this.getDataUltimoReajuste() + ", cargo= " + this.getCargo() + "]";
+	}
+
+	private Cargo getCargo() {
+		return this.cargo;
 	}
 
 	@Override
@@ -74,8 +87,6 @@ public class Funcionario {
 		Funcionario other = (Funcionario) obj;
 		return Objects.equals(this.getCpf(), other.getCpf());
 	}
-	
-	
 	
 	
 	

@@ -6,10 +6,11 @@ import java.time.temporal.ChronoUnit;
 
 import br.edu.ifba.inf011.solid.ValidacaoException;
 import br.edu.ifba.inf011.solid.model.Funcionario;
+import br.edu.ifba.inf011.solid.servicos.reajuste.Reajustavel;
 
 public class RegraPeriodicidade implements Regra{
 	
-	public void validar(Funcionario funcionario, BigDecimal indice) throws ValidacaoException {
+	public void validar(Reajustavel funcionario, BigDecimal indice) throws ValidacaoException {
 		LocalDate ultimoReajuste = funcionario.getDataUltimoReajuste();
 		LocalDate now = LocalDate.now();
 		if (ChronoUnit.MONTHS.between(ultimoReajuste, now) < 2)
