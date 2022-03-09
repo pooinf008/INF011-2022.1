@@ -28,8 +28,7 @@ public class ReajustadorSalario {
 		
 		BigDecimal salarioCorrigido = funcionario.getSalario().multiply(indice);
 		salarioCorrigido = salarioCorrigido.add(funcionario.getSalario());
-		funcionario.setSalario(salarioCorrigido);
-		funcionario.setDataUltimoReajuste(LocalDate.now());		
+		funcionario.reajustar(salarioCorrigido, LocalDate.now());
 	}
 
 

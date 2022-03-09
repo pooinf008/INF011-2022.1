@@ -6,22 +6,24 @@ import java.util.Objects;
 
 import br.edu.ifba.inf011.solid.ValidacaoException;
 
-public class Funcionario {
-	
+public class Terceirizado{
+
+	private String empresa;
 	private FichaFuncional ficha;
 	
-	public Funcionario(String nome, String matricula, String cpf,
-					   BigDecimal salario) {
-		this(nome, matricula, cpf, salario, LocalDate.now());
+	public Terceirizado(String nome, String matricula, String cpf,
+			   BigDecimal salario, String empresa) {
+			this(nome, matricula, cpf, salario, LocalDate.now(), empresa);
 	}
-	
-	public Funcionario(String nome, String matricula, String cpf,
-			   BigDecimal salario, LocalDate dataUltimoReajuste) {
-			this.ficha = new FichaFuncional(nome, matricula, cpf,
-											salario, dataUltimoReajuste);
+
+	public Terceirizado(String nome, String matricula, String cpf,
+	   BigDecimal salario, LocalDate dataUltimoReajuste, String empresa) {
+		this.ficha = new FichaFuncional(nome, matricula, cpf,
+									salario, dataUltimoReajuste);
+		this.empresa = empresa;
 	}	
-	
-	
+
+
 	public String getNome() {
 		return this.ficha.getNome();
 	}
@@ -34,16 +36,11 @@ public class Funcionario {
 	public LocalDate getDataUltimoReajuste() {
 		return this.ficha.getDataUltimoReajuste();
 	}
-	
+
 	public void setSalario(BigDecimal salario) {
 		this.ficha.setSalario(salario);
 	}
-	
-	public void reajustar(BigDecimal salario, LocalDate dataUltimoReajuste) throws ValidacaoException {
-		this.setSalario(salario);
-		this.setDataUltimoReajuste(dataUltimoReajuste);
-	}
-	
+
 	public void setDataUltimoReajuste(LocalDate dataUltimoReajuste) {
 		this.ficha.setDataUltimoReajuste(dataUltimoReajuste);
 	}
@@ -54,14 +51,14 @@ public class Funcionario {
 
 	@Override
 	public String toString() {
-		return "Funcionario [nome=" + this.getNome() + ", cpf=" + this.getCpf() + ", salario=" + this.getSalario() + ", dataUltimoReajuste="
-				+ this.getDataUltimoReajuste() + "]";
+		return "Terceiro [nome=" + this.getNome() + ", cpf=" + this.getCpf() + ", salario=" + this.getSalario() + ", dataUltimoReajuste="
+		+ this.getDataUltimoReajuste() + "]";
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(this.getCpf());
-	}
+	}	
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -71,13 +68,9 @@ public class Funcionario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Funcionario other = (Funcionario) obj;
+		Terceirizado other = (Terceirizado) obj;
 		return Objects.equals(this.getCpf(), other.getCpf());
-	}
+	}	
 	
-	
-	
-	
-	
+}	
 
-}
