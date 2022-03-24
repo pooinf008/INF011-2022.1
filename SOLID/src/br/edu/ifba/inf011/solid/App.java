@@ -6,12 +6,10 @@ import java.util.List;
 
 import br.edu.ifba.inf011.solid.database.PessoalDataBase;
 import br.edu.ifba.inf011.solid.model.Funcionario;
-import br.edu.ifba.inf011.solid.model.Terceirizado;
 import br.edu.ifba.inf011.solid.servicos.reajuste.ReajustadorSalario;
 import br.edu.ifba.inf011.solid.servicos.reajuste.regras.Regra;
 import br.edu.ifba.inf011.solid.servicos.reajuste.regras.RegraMaiorIndice;
 import br.edu.ifba.inf011.solid.servicos.reajuste.regras.RegraMenorIndice;
-import br.edu.ifba.inf011.solid.servicos.reajuste.regras.RegraNegadoLetraE;
 import br.edu.ifba.inf011.solid.servicos.reajuste.regras.RegraPeriodicidade;
 
 public class App {
@@ -33,7 +31,6 @@ public class App {
 		
 		ReajustadorSalario reajustador = new ReajustadorSalario(regras);
 		Funcionario gamma = this.database.findFuncionario("11111111111");
-		Terceirizado bob = this.database.findTerceirizado("55555555555");		
 		System.out.println(gamma);
 		try {
 			reajustador.reajustar(gamma, new BigDecimal(0.2));

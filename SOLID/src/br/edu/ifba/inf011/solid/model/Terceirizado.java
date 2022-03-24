@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import br.edu.ifba.inf011.solid.ValidacaoException;
-
 public class Terceirizado{
 
 	private String empresa;
@@ -47,6 +45,12 @@ public class Terceirizado{
 
 	public String getMatricula() {
 		return this.ficha.getMatricula();
+	}
+	
+	
+
+	public String getEmpresa() {
+		return empresa;
 	}
 
 	@Override

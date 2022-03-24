@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import br.edu.ifba.inf011.solid.ValidacaoException;
-import br.edu.ifba.inf011.solid.model.Funcionario;
 import br.edu.ifba.inf011.solid.servicos.reajuste.Reajustavel;
 
 public class RegraPeriodicidade implements Regra{
