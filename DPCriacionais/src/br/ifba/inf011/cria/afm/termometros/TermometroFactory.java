@@ -1,4 +1,4 @@
-package br.ifba.inf011.cria.fm.termometros;
+package br.ifba.inf011.cria.afm.termometros;
 
 import java.lang.reflect.InvocationTargetException;
 

@@ -1,14 +1,14 @@
-package br.ifba.inf011.cria.fm.termometros;
+package br.ifba.inf011.cria.afm.atuadores;
 
 import java.lang.reflect.InvocationTargetException;
 
-public abstract class TermometroFactory {
+public abstract class AtuadorFactory {
 	
 	protected double temperaturaMaxima;
 	protected double temperaturaMinima;
 
 
- 	public static TermometroFactory getFactory(TipoTermometro tipo, 
+ 	public static AtuadorFactory getFactory(TipoAtuador tipo, 
  											   double temperaturaMinima,
  											   double temperaturaMaxima) 
  													   throws InstantiationException, 
@@ -19,19 +19,19 @@ public abstract class TermometroFactory {
  													   		  NoSuchMethodException, 
  													   		  SecurityException {
  		String factoryName = tipo.getFactoryName();
- 		TermometroFactory factory  = (TermometroFactory) Class.forName(factoryName).getConstructor().newInstance();
+ 		AtuadorFactory factory  = (AtuadorFactory) Class.forName(factoryName).getConstructor().newInstance();
  		factory.setTemperaturaMinima(temperaturaMinima);
  		factory.setTemperaturaMaxima(temperaturaMaxima);
 		return factory;
 	}	
  
-	public TermometroFactory() {
+	public AtuadorFactory() {
 		this(0, 0);
 	}
 	
 	
 	
-	public TermometroFactory(double temperaturaMinima, double temperaturaMaxima) {
+	public AtuadorFactory(double temperaturaMinima, double temperaturaMaxima) {
 		this.temperaturaMinima = temperaturaMinima;
 		this.temperaturaMaxima = temperaturaMaxima;
 	}
@@ -44,10 +44,10 @@ public abstract class TermometroFactory {
 		this.temperaturaMaxima = temperaturaMaxima;
 	}	
 
-	public abstract TermometroIF criaTermometro(); 
+	public abstract AtuadorIF criaAtuador(); 
 
-	public TermometroIF getTermometro() {
-		TermometroIF termometro = this.criaTermometro();
+	public AtuadorIF getAtuador() {
+		AtuadorIF termometro = this.criaAtuador();
 		return termometro;
 	}
 	
