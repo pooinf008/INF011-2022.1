@@ -15,10 +15,9 @@ public class Aplicacao {
 	
 	public void rodar() throws InterruptedException, InstantiationException, IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
 		Ambiente ambiente = new Ambiente();
-		TermometroFactory factory = TermometroFactory.getFactory(TipoTermometro.BASICO, 30);
+		TermometroFactory factory = TermometroFactory.getFactory(TipoTermometro.FAIXA, 20, 30);
 		TermometroIF termometro  = factory.getTermometro();
 		while(true) {
-			double temperatura = ambiente.getTemperatura();
 			termometro.lerTemperatura(ambiente);
 			ambiente.randomizar();
 			Thread.sleep(100);

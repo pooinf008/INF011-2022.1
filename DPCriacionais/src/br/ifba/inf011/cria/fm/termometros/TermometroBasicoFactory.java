@@ -6,8 +6,8 @@ public class TermometroBasicoFactory extends TermometroFactory{
 		
 	}
 	
-	public TermometroBasicoFactory(double temperatura) {
-		super(temperatura);
+	public TermometroBasicoFactory(double temperaturaMinima, double temperaturaMaxima) {
+		super(temperaturaMinima, temperaturaMaxima);
 	}
 
 	@Override

@@ -6,13 +6,13 @@ public class TermometroAltaFactory extends TermometroFactory{
 		
 	}
 	
-	public TermometroAltaFactory(double temperatura) {
-		super(temperatura);
+	public TermometroAltaFactory(double temperaturaMinima, double temperaturaMaxima) {
+		super(temperaturaMinima, temperaturaMaxima);
 	}
 
 	@Override
 	public TermometroIF criaTermometro() {
-		return new TermometroAlta(30);
+		return new TermometroAlta(this.temperaturaMaxima);
 	}
 	
 	
