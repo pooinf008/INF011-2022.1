@@ -8,6 +8,10 @@ import br.ifba.inf011.cria.afm.atuadores.AtuadorIF;
 import br.ifba.inf011.cria.afm.atuadores.Estabilizador;
 import br.ifba.inf011.cria.afm.atuadores.Resfriador;
 import br.ifba.inf011.cria.afm.atuadores.TipoAtuador;
+import br.ifba.inf011.cria.afm.controle.ControleFactory;
+import br.ifba.inf011.cria.afm.controle.ControleFaixa;
+import br.ifba.inf011.cria.afm.controle.ControleIF;
+import br.ifba.inf011.cria.afm.controle.TipoControle;
 import br.ifba.inf011.cria.afm.termometros.TermometroAlta;
 import br.ifba.inf011.cria.afm.termometros.TermometroAltaFactory;
 import br.ifba.inf011.cria.afm.termometros.TermometroBasico;
@@ -18,15 +22,13 @@ import br.ifba.inf011.cria.afm.termometros.TipoTermometro;
 
 public class Aplicacao {
 	
-	public void rodar() throws InterruptedException, InstantiationException, IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
+	public void rodar() throws Exception{
 		Ambiente ambiente = new Ambiente();
 		
-		AtuadorIF atuador = AtuadorFactory
-							.getFactory(TipoAtuador.RESFRIADOR, 24, 28)
-							.getAtuador();
-		TermometroIF termometro  = TermometroFactory
-								   .getFactory(TipoTermometro.ALTA, 24, 28)
-								   .getTermometro();
+		ControleIF controlador = ControleFactory.getFactory(TipoControle.FAIXA, 27, 29).getControle();
+		
+		AtuadorIF atuador = controlador.getAtuador();
+		TermometroIF termometro = controlador.getTermometro();
 		
 		while(true) {
 			termometro.lerTemperatura(ambiente);
@@ -39,7 +41,7 @@ public class Aplicacao {
 
 	
 	
-	public static void main(String[] args) throws InstantiationException, InterruptedException, IllegalAccessException, ClassNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+	public static void main(String[] args) throws Exception {
 		(new Aplicacao()).rodar();
 	}
 
