@@ -2,6 +2,7 @@ package br.ifba.inf011.cria.fm.termometros;
 
 import java.lang.reflect.InvocationTargetException;
 
+//CREATOR EM FACTORY METHOD
 public abstract class TermometroFactory {
 	
 	protected double temperaturaMaxima;
