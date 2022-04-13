@@ -6,8 +6,18 @@ public class Diretor {
 	
 	private Builder builder;
 	
+	public Diretor() {
+		this.setBuilder(null);
+	}	
+	
 	public Diretor(Builder builder) {
+		this.setBuilder(builder);
+	}
+	
+	public void setBuilder(Builder builder) {
 		this.builder = builder;
+		if(this.builder != null)
+			this.builder.reset();
 	}
 	
 	public void makeControleFaixa(double min, double max, PrintStream saidaPadrao, PrintStream saidaErro) {

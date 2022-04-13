@@ -10,5 +10,4 @@ public interface Builder {
 	public void adicionarSaidaPadrao(PrintStream saidaPadrao);
 	public void adicionarEstabilizador(double min, double max);
 	public void adicionarResfriador(double max);
-	public ControleIF getControle();
 }

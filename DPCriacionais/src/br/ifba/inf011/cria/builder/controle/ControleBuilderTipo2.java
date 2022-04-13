@@ -7,7 +7,7 @@ import br.ifba.inf011.cria.builder.atuador.Resfriador;
 import br.ifba.inf011.cria.builder.termometro.TermometroAlta;
 import br.ifba.inf011.cria.builder.termometro.TermometroFaixa;
 
-public class ControleBuilder implements Builder {
+public class ControleBuilderTipo2{
 
 	private TermometroIF termometro;
 	private AtuadorIF atuador;
@@ -15,36 +15,36 @@ public class ControleBuilder implements Builder {
 	private PrintStream streamStd;
 	
 	
-	@Override
-	public void reset() {
+	public ControleBuilderTipo2 reset() {
 		this.termometro = new TermometroAlta(30);
 		this.atuador = new Resfriador(30);
 		this.streamErr = System.err;
 		this.streamStd = System.out;
+		return this;
 	}
 
-	@Override
-	public void adicionarTermometroFaixa(double min, double max) {
+	public ControleBuilderTipo2 adicionarTermometroFaixa(double min, double max) {
 		this.termometro = new TermometroFaixa(min, max);
+		return this;
 	}
 
-	@Override
-	public void adicionarTermometroAlta(double max) {
+	public ControleBuilderTipo2 adicionarTermometroAlta(double max) {
 		this.termometro = new TermometroAlta(max);
+		return this;
 	}
 
-	@Override
-	public void adicionarEstabilizador(double min, double max) {
+	public ControleBuilderTipo2 adicionarEstabilizador(double min, double max) {
 		this.atuador = new Estabilizador(min, max);
-
+		return this;
 	}
 
-	@Override
-	public void adicionarResfriador(double max) {
+	
+	public ControleBuilderTipo2 adicionarResfriador(double max) {
 		this.atuador = new Resfriador(max);
+		return this;
 	}
 
-	public ControleIF getControle() {
+	public ControleIF build() {
 		this.termometro.setSaidaErro(this.streamErr);
 		this.termometro.setSaidaErro(this.streamStd);
 		this.atuador.setSaidaErro(this.streamErr);
@@ -52,16 +52,15 @@ public class ControleBuilder implements Builder {
 		return controle;
 	}
 
-	@Override
-	public void adicionarSaidaErro(PrintStream saidaErro) {
-		this.streamErr = saidaErro; 
+	public ControleBuilderTipo2 adicionarSaidaErro(PrintStream saidaErro) {
+		this.streamErr = saidaErro;
+		return this;
 		
 	}
 
-	@Override
-	public void adicionarSaidaPadrao(PrintStream saidaPadrao) {
+	public ControleBuilderTipo2 adicionarSaidaPadrao(PrintStream saidaPadrao) {
 		this.streamStd = saidaPadrao;
-		
+		return this;
 	}
 
 }
