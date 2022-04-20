@@ -51,8 +51,15 @@ public class Aplicacao {
 		diretor.setBuilder(descXMLBuilder);
 		diretor.makeControleFaixa(26, 30, System.out, System.err);
 		String descritor = descXMLBuilder.getDescritor();
+
+		
+		diretor.makeControleAlta(30, System.out, System.err);
+		String descritor2 = descXMLBuilder.getDescritor();
+		
 		
 		System.out.println(descritor);
+		
+		System.out.println(descritor2);
 		
 		while(true) {
 			controlador.lerTemperatura(ambiente);

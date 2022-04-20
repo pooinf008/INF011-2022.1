@@ -18,7 +18,8 @@ public class TermometroAlta implements TermometroIF{
 		else
 			System.out.println("Termometro Alta: " + ambiente.getTemperatura());
 	}
-	
+
+
 	
 
 }
