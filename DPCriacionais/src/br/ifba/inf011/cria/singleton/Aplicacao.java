@@ -1,15 +1,15 @@
-package br.ifba.inf011.cria.prototype;
+package br.ifba.inf011.cria.singleton;
 
 
-import br.ifba.inf011.cria.prototype.termometro.TermometroAlta;
-import br.ifba.inf011.cria.prototype.termometro.TermometroFaixa;
-import br.ifba.inf011.cria.prototype.termometro.TermometroIF;
-import br.ifba.inf011.cria.prototype.controle.Controle;
-import br.ifba.inf011.cria.prototype.controle.ControleBuilder;
-import br.ifba.inf011.cria.prototype.controle.ControleBuilderTipo2;
-import br.ifba.inf011.cria.prototype.controle.ControleIF;
-import br.ifba.inf011.cria.prototype.controle.DescritorXMLBuilder;
-import br.ifba.inf011.cria.prototype.controle.Diretor;
+import br.ifba.inf011.cria.singleton.termometro.TermometroAlta;
+import br.ifba.inf011.cria.singleton.termometro.TermometroFaixa;
+import br.ifba.inf011.cria.singleton.termometro.TermometroIF;
+import br.ifba.inf011.cria.singleton.controle.Controle;
+import br.ifba.inf011.cria.singleton.controle.ControleBuilder;
+import br.ifba.inf011.cria.singleton.controle.ControleBuilderTipo2;
+import br.ifba.inf011.cria.singleton.controle.ControleIF;
+import br.ifba.inf011.cria.singleton.controle.DescritorXMLBuilder;
+import br.ifba.inf011.cria.singleton.controle.Diretor;
 
 
 public class Aplicacao {
@@ -20,7 +20,7 @@ public class Aplicacao {
 		
 		CatalogoControles catalogo = new CatalogoControles();
 		
-		ControleIF controlador2 = catalogo.get("Controle Alta Padrão");
+		ControleIF controlador2 = catalogo.get(TipoControle.AltaPadrao);
 		
 		
 		

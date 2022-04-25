@@ -1,8 +1,8 @@
-package br.ifba.inf011.cria.prototype.termometro;
+package br.ifba.inf011.cria.singleton.termometro;
 
 import java.io.PrintStream;
 
-import br.ifba.inf011.cria.prototype.Ambiente;
+import br.ifba.inf011.cria.singleton.Ambiente;
 
 public class TermometroFaixa implements TermometroIF{
 	

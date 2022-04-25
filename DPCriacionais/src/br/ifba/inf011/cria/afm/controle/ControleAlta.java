@@ -4,11 +4,8 @@ import java.lang.reflect.InvocationTargetException;
 
 import br.ifba.inf011.cria.afm.atuadores.AtuadorFactory;
 import br.ifba.inf011.cria.afm.atuadores.AtuadorIF;
-import br.ifba.inf011.cria.afm.atuadores.Resfriador;
 import br.ifba.inf011.cria.afm.atuadores.TipoAtuador;
-import br.ifba.inf011.cria.afm.termometros.TermometroAlta;
 import br.ifba.inf011.cria.afm.termometros.TermometroFactory;
-import br.ifba.inf011.cria.afm.termometros.TermometroFaixa;
 import br.ifba.inf011.cria.afm.termometros.TermometroIF;
 import br.ifba.inf011.cria.afm.termometros.TipoTermometro;
 

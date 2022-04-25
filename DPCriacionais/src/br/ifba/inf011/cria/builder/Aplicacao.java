@@ -1,9 +1,5 @@
 package br.ifba.inf011.cria.builder;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import br.ifba.inf011.cria.builder.controle.Builder;
 import br.ifba.inf011.cria.builder.controle.ControleBuilder;
 import br.ifba.inf011.cria.builder.controle.ControleBuilderTipo2;
 import br.ifba.inf011.cria.builder.controle.ControleIF;

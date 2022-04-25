@@ -1,12 +1,6 @@
 package br.ifba.inf011.cria.fm;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import br.ifba.inf011.cria.fm.termometros.TermometroAlta;
-import br.ifba.inf011.cria.fm.termometros.TermometroAltaFactory;
-import br.ifba.inf011.cria.fm.termometros.TermometroBasico;
-import br.ifba.inf011.cria.fm.termometros.TermometroBasicoFactory;
 import br.ifba.inf011.cria.fm.termometros.TermometroFactory;
 import br.ifba.inf011.cria.fm.termometros.TermometroIF;
 import br.ifba.inf011.cria.fm.termometros.TipoTermometro;
