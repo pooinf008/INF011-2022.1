@@ -11,8 +11,15 @@ public class CatalogoControles {
 	
 	private Map<TipoControle, ControleIF> controles;
 	
+	private static CatalogoControles catalogo = null;
 	
-	public CatalogoControles() {
+	public static CatalogoControles getCatalogoControles() {
+		if(CatalogoControles.catalogo == null)
+			CatalogoControles.catalogo = new CatalogoControles();
+		return CatalogoControles.catalogo;
+	}
+	
+	private CatalogoControles() {
 		this.controles = new HashMap<TipoControle, ControleIF>();
 		this.carregarControles();
 	}

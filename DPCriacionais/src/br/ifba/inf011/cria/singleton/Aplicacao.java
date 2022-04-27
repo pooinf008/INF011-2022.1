@@ -18,9 +18,14 @@ public class Aplicacao {
 		
 		Ambiente ambiente = new Ambiente();
 		
-		CatalogoControles catalogo = new CatalogoControles();
+		CatalogoControles catalogo = CatalogoControles.getCatalogoControles();
 		
 		ControleIF controlador2 = catalogo.get(TipoControle.AltaPadrao);
+		
+		CatalogoControles catalogo2 = CatalogoControles.getCatalogoControles();
+		
+		System.out.println(catalogo);
+		System.out.println(catalogo2);
 		
 		
 		
