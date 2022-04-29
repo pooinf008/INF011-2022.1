@@ -1,24 +1,37 @@
 package br.ifba.inf011.comp.strategy;
 
 import br.ifba.inf011.comp.strategy.controlador.ControladorGenerico;
+import br.ifba.inf011.comp.strategy.controlador.EstrategiaControle;
+import br.ifba.inf011.comp.strategy.controlador.IntegralControle;
+import br.ifba.inf011.comp.strategy.controlador.ProporcionalControle;
 import br.ifba.inf011.comp.strategy.controlador.TipoControlador;
 
 public class Aplicacao {
 	
 	public void rodar() throws Exception{
+	
 		
-		ControleIF controle = new ControladorGenerico(2, 30, System.out, TipoControlador.Integral);
+		ControleIF controle = new ControladorGenerico(3, 35.0, System.out);
 		Ambiente ambiente = new Ambiente(27.0);
 		int rodadas = 0;
 		
-		while(rodadas < 50000) {
+		controle.setEstrategia(TipoControlador.Proporcional);
+		
+		while(rodadas < 500) {
+			
+			if(rodadas % 2 == 0) {
+				controle.setEstrategia(TipoControlador.Integral);
+			}else {
+				controle.setEstrategia(TipoControlador.Proporcional);	
+			}
+
+			
 			ambiente.randomizar();
 			System.out.println(ambiente.getTemperatura());
 			controle.controlar(ambiente);
-//			Thread.sleep(100);
 			rodadas++;
 		}
-		
+		System.out.println("\n\n\tResumo");
 		controle.printResumo(System.out);
 	}
 

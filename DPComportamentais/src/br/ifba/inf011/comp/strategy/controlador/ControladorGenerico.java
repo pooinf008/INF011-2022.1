@@ -18,16 +18,20 @@ public class ControladorGenerico implements ControleIF{
 	private List<Double> historico;
 	private List<Double> diferenca;
 	private PrintStream log;
-	private TipoControlador tipo;
+	private EstrategiaControle estrategia;
 	
 	
-	public ControladorGenerico(double ganho, double setPoint, PrintStream log, TipoControlador tipo) {
+	public ControladorGenerico(double ganho, double setPoint, PrintStream log) {
 		this.setPoint = setPoint;
 		this.ganho = ganho;
 		this.historico = new ArrayList<Double>();
 		this.diferenca = new ArrayList<Double>();
 		this.log = log;
-		this.tipo = tipo;
+		this.estrategia = TipoControlador.Dummy;
+	}
+	
+	public void setEstrategia(EstrategiaControle estrategia) {
+		this.estrategia = estrategia;
 	}
 	
 	@Override
@@ -37,57 +41,9 @@ public class ControladorGenerico implements ControleIF{
 		
 	    this.historico.add(temperatura);
 	    this.diferenca.add(Math.abs(delta));
-	    if(this.tipo == TipoControlador.Proporcional)
-	    	this.controlarProporcional(ambiente, this.setPoint, this.historico, this.diferenca);
-	    else if(this.tipo == TipoControlador.Dummy)
-	    	this.controlarDummy(ambiente, this.setPoint, this.historico, this.diferenca);
-	    else if(this.tipo == TipoControlador.Integral)
-	    	this.controlarIntegral(ambiente, this.setPoint, this.historico, this.diferenca);
+	    this.estrategia.controlar(ambiente, this.ganho, this.setPoint, 
+	    						  this.historico, this.diferenca, this.log);
 	}
-	
-	
-	public void controlarProporcional(Ambiente ambiente, double setPoint, List<Double> historico, List<Double> diferenca) {
-		
-		double delta = historico.get(historico.size() - 1);
-		double tempAtuacao = Math.abs(delta * ganho);
-		
-	    if(delta > 0) {
-	    	ambiente.esfriar(tempAtuacao);
-	    	this.log.println("Atuando para ESFRIAR o ambiente... Temperatura de atuação: " + tempAtuacao + "°C");
-	    }	
-	    else{
-	    	ambiente.aquecer(tempAtuacao);
-	    	this.log.println("Atuando para AQUECER o ambiente... Temperatura de atuação: " + tempAtuacao + "°C");
-	    }
-	}
-	
-	
-	public void controlarIntegral(Ambiente ambiente, double setPoint, List<Double> historico, List<Double> diferenca) {
-		double temp = historico.get(historico.size() - 1);
-		int qtdeAtuacao = (diferenca.size() > ControladorGenerico.HISTORICO_INTEGRAL) ?
-					  	  ControladorGenerico.HISTORICO_INTEGRAL : diferenca.size();
-		double deltaHistorico = 0;
-		for(int i = historico.size() - 1, j = 0; j < qtdeAtuacao; i--, j++)
-			deltaHistorico +=  diferenca.get(i);
-		
-		deltaHistorico = deltaHistorico / qtdeAtuacao;
-		double tempAtuacao = Math.abs(deltaHistorico * ganho);
-		
-	    if(temp > this.setPoint) {
-	    	ambiente.esfriar(tempAtuacao);
-	    	this.log.println("Atuando para ESFRIAR o ambiente... Temperatura de atuação: " + tempAtuacao + "°C");
-	    }	
-	    else{
-	    	ambiente.aquecer(tempAtuacao);
-	    	this.log.println("Atuando para AQUECER o ambiente... Temperatura de atuação: " + tempAtuacao + "°C");
-	    }
-	}
-	
-	
-	public void controlarDummy(Ambiente ambiente, double setPoint, List<Double> historico, List<Double> diferenca) {
-    	this.log.println("Temperatura de atuação: 0°C");
-	}
-	
 	
 	
 	public void printResumo(PrintStream log) {
@@ -95,12 +51,13 @@ public class ControladorGenerico implements ControleIF{
 		log.println("Estatisticas de Temperatura");
 		log.println("\t Média: " + estatisticas.getMediaAritmetica());
 		log.println("\t Desvio Padrão: " + estatisticas.getDesvioPadrao());
+		log.println("\t Qtde de Medidas: " + estatisticas.getTotalElementos());
 		
 		estatisticas = new Estatistica(this.diferenca);
 		log.println("\nEstatisticas dos Erros");
 		log.println("\t Média: " + estatisticas.getMediaAritmetica());
 		log.println("\t Desvio Padrão: " + estatisticas.getDesvioPadrao());
-		
+		log.println("\t Qtde de Medidas: " + estatisticas.getTotalElementos());	
 	}
 
 }
