@@ -1,11 +1,11 @@
-package br.ifba.inf011.comp.strategy.controlador;
+package br.ifba.inf011.comp.strategy;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ifba.inf011.comp.strategy.Ambiente;
-import br.ifba.inf011.comp.strategy.ControleIF;
+import br.ifba.inf011.comp.strategy.controlador.EstrategiaControle;
+import br.ifba.inf011.comp.strategy.controlador.TipoControlador;
 import br.ifba.inf011.comp.strategy.util.Estatistica;
 
 public class ControladorGenerico implements ControleIF{
@@ -19,6 +19,7 @@ public class ControladorGenerico implements ControleIF{
 	private List<Double> diferenca;
 	private PrintStream log;
 	private EstrategiaControle estrategia;
+	private double energy;	
 	
 	
 	public ControladorGenerico(double ganho, double setPoint, PrintStream log) {
@@ -28,6 +29,7 @@ public class ControladorGenerico implements ControleIF{
 		this.diferenca = new ArrayList<Double>();
 		this.log = log;
 		this.estrategia = TipoControlador.Dummy;
+		this.energy = 100;
 	}
 	
 	public void setEstrategia(EstrategiaControle estrategia) {
@@ -41,7 +43,7 @@ public class ControladorGenerico implements ControleIF{
 		
 	    this.historico.add(temperatura);
 	    this.diferenca.add(Math.abs(delta));
-	    this.estrategia.controlar(ambiente, this.ganho, this.setPoint, 
+	    this.energy -= this.estrategia.controlar(ambiente, this.ganho, this.setPoint, 
 	    						  this.historico, this.diferenca, this.log);
 	}
 	
@@ -59,5 +61,9 @@ public class ControladorGenerico implements ControleIF{
 		log.println("\t Desvio Padrão: " + estatisticas.getDesvioPadrao());
 		log.println("\t Qtde de Medidas: " + estatisticas.getTotalElementos());	
 	}
+	
+	public double getEnergy() {
+		return this.energy;
+	}	
 
 }

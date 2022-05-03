@@ -1,8 +1,8 @@
-package br.ifba.inf011.comp.strategy;
+package br.ifba.inf011.comp.cor;
 
 import java.io.PrintStream;
 
-import br.ifba.inf011.comp.strategy.controlador.EstrategiaControle;
+import br.ifba.inf011.comp.cor.controlador.EstrategiaControle;
 
 public interface ControleIF{
 	public void controlar(Ambiente ambiente) throws Exception;

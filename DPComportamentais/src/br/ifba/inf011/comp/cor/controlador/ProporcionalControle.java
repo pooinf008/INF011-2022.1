@@ -1,9 +1,9 @@
-package br.ifba.inf011.comp.strategy.controlador;
+package br.ifba.inf011.comp.cor.controlador;
 
 import java.io.PrintStream;
 import java.util.List;
 
-import br.ifba.inf011.comp.strategy.Ambiente;
+import br.ifba.inf011.comp.cor.Ambiente;
 
 public class ProporcionalControle implements EstrategiaControle{
 

@@ -7,7 +7,7 @@ public class Aplicacao {
 		Ambiente ambiente = new Ambiente(27.0);
 		int rodadas = 0;
 		
-		while(rodadas < 500000) {
+		while(controle.getEnergy() > 0) {
 			ambiente.randomizar();
 			System.out.println(ambiente.getTemperatura());
 			controle.controlar(ambiente);

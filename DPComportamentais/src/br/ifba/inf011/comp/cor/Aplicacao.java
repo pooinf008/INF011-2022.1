@@ -1,6 +1,6 @@
-package br.ifba.inf011.comp.strategy;
+package br.ifba.inf011.comp.cor;
 
-import br.ifba.inf011.comp.strategy.controlador.TipoControlador;
+import br.ifba.inf011.comp.cor.controlador.TipoControlador;
 
 public class Aplicacao {
 	

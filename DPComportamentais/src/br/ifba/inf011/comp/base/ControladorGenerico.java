@@ -16,6 +16,7 @@ public class ControladorGenerico implements ControleIF{
 	private List<Double> diferenca;
 	private PrintStream log;
 	private TipoControlador tipo;
+	private double energy;
 	
 	
 	public ControladorGenerico(double ganho, double setPoint, PrintStream log, TipoControlador tipo) {
@@ -25,6 +26,7 @@ public class ControladorGenerico implements ControleIF{
 		this.diferenca = new ArrayList<Double>();
 		this.log = log;
 		this.tipo = tipo;
+		this.energy = 100;
 	}
 	
 	@Override
@@ -56,6 +58,8 @@ public class ControladorGenerico implements ControleIF{
 	    	ambiente.aquecer(tempAtuacao);
 	    	this.log.println("Atuando para AQUECER o ambiente... Temperatura de atuação: " + tempAtuacao + "°C");
 	    }
+	    
+	    this.energy -= 0.2; 
 	}
 	
 	
@@ -78,11 +82,13 @@ public class ControladorGenerico implements ControleIF{
 	    	ambiente.aquecer(tempAtuacao);
 	    	this.log.println("Atuando para AQUECER o ambiente... Temperatura de atuação: " + tempAtuacao + "°C");
 	    }
+	    this.energy -= 0.5;
 	}
 	
 	
 	public void controlarDummy(Ambiente ambiente, double setPoint, List<Double> historico, List<Double> diferenca) {
     	this.log.println("Temperatura de atuação: 0°C");
+    	this.energy -= 0.001;
 	}
 	
 	
@@ -98,6 +104,10 @@ public class ControladorGenerico implements ControleIF{
 		log.println("\t Média: " + estatisticas.getMediaAritmetica());
 		log.println("\t Desvio Padrão: " + estatisticas.getDesvioPadrao());
 		
+	}
+	
+	public double getEnergy() {
+		return this.energy;
 	}
 
 }
