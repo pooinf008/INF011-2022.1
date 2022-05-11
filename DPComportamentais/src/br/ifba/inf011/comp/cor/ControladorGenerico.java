@@ -4,8 +4,10 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ifba.inf011.comp.cor.controlador.EstrategiaControle;
-import br.ifba.inf011.comp.cor.controlador.TipoControlador;
+import br.ifba.inf011.comp.cor.handle.ControleHandler;
+import br.ifba.inf011.comp.cor.handle.IntegralHandler;
+import br.ifba.inf011.comp.cor.handle.ProporcionalHandler;
+import br.ifba.inf011.comp.cor.handle.ZeroHandler;
 import br.ifba.inf011.comp.cor.util.Estatistica;
 
 public class ControladorGenerico implements ControleIF{
@@ -18,7 +20,7 @@ public class ControladorGenerico implements ControleIF{
 	private List<Double> historico;
 	private List<Double> diferenca;
 	private PrintStream log;
-	private EstrategiaControle estrategia;
+	private ControleHandler handler;
 	private double energy;	
 	
 	
@@ -28,14 +30,13 @@ public class ControladorGenerico implements ControleIF{
 		this.historico = new ArrayList<Double>();
 		this.diferenca = new ArrayList<Double>();
 		this.log = log;
-		this.estrategia = TipoControlador.Dummy;
+		this.handler = new ProporcionalHandler(
+						new IntegralHandler(
+							new ZeroHandler()));
 		this.energy = 100;
 	}
 	
-	public void setEstrategia(EstrategiaControle estrategia) {
-		this.estrategia = estrategia;
-	}
-	
+
 	@Override
 	public void controlar(Ambiente ambiente) throws Exception {
 		double temperatura = ambiente.getTemperatura();
@@ -43,7 +44,7 @@ public class ControladorGenerico implements ControleIF{
 		
 	    this.historico.add(temperatura);
 	    this.diferenca.add(Math.abs(delta));
-	    this.energy -= this.estrategia.controlar(ambiente, this.ganho, this.setPoint, 
+	    this.energy -= this.handler.controlar(ambiente, this.ganho, this.setPoint, 
 	    						  this.historico, this.diferenca, this.log);
 	}
 	

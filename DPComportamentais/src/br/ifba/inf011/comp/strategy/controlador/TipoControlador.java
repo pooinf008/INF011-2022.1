@@ -29,7 +29,7 @@ public enum TipoControlador implements EstrategiaControle{
 		    	ambiente.aquecer(tempAtuacao);
 		    }
 			log.println("PROPORCIONAL");
-			return 0.02;
+			return 0.1;
 		}
 	}, 
 	Integral{
@@ -53,7 +53,7 @@ public enum TipoControlador implements EstrategiaControle{
 		    	ambiente.aquecer(tempAtuacao);
 		    }
 		    log.println("INTEGRAL");
-		    return 0.05;
+		    return 0.15;
 		}
 	
 	};

@@ -16,7 +16,7 @@ public class Aplicacao {
 		while(controle.getEnergy() > 0) {
 			
 			if(rodadas % 2 == 0) {
-				controle.setEstrategia(TipoControlador.Proporcional);
+				controle.setEstrategia(TipoControlador.Integral);
 			}else {
 				controle.setEstrategia(TipoControlador.Dummy);	
 			}
