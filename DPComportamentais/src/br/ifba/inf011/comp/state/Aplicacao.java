@@ -21,6 +21,8 @@ public class Aplicacao {
 				for(int i = 0; i < 50; i++)
 					controle.controlar(ambiente);
 				controle.ligar();
+				controle.ligar();
+				controle.ligar();
 			}
 		}
 		System.out.println("\n\n\tResumo");
