@@ -11,6 +11,36 @@ import br.ifba.inf011.comp.state.util.Estatistica;
 public class ControladorGenerico implements ControleIF{
 	
 	
+	public class Snapshot{
+		private ControladorState estado;
+		private List<Double> historico;
+		private List<Double> diferenca;
+		
+		private Snapshot(ControladorState estado, List<Double> historico, List<Double> diferenca) {
+			this.estado = estado;
+			this.historico = new ArrayList<Double>(historico);
+			this.diferenca = new ArrayList<Double>(diferenca);
+		}
+		
+		private List<Double> getHistorico(){
+			return this.historico;
+		}
+		
+		private List<Double> getDiferenca(){
+			return this.diferenca;
+		}
+		
+		private ControladorState getEstado() {
+			return this.estado;
+		}
+		
+		public int getId() {
+			return this.historico.size();
+		}
+		
+		
+	}
+	
 	public static final int HISTORICO_INTEGRAL = 5;
 	
 	private double setPoint;
@@ -86,6 +116,35 @@ public class ControladorGenerico implements ControleIF{
 	@Override
 	public void ligar() throws Exception {
 		this.estado = this.estado.ligar();
+	}
+
+
+	@Override
+	public Snapshot checkpoint() throws Exception {
+		return new Snapshot(this.estado, this.historico, this.diferenca);
+	}
+
+
+	@Override
+	public void restore(Snapshot snapshot) throws Exception {
+		this.diferenca = snapshot.getDiferenca();
+		this.historico = snapshot.getHistorico();
+		this.estado = snapshot.getEstado(); 
+	}
+
+
+	@Override
+	public SnapshotIF checkpoint2IF() throws Exception {
+		return new ConcreteSnapshot(this.estado, this.historico, this.diferenca);
+	}
+
+
+	@Override
+	public void restoreFromIF(SnapshotIF snapshotif) throws Exception {
+		ConcreteSnapshot snapshot = (ConcreteSnapshot) snapshotif;
+		this.diferenca = snapshot.getDiferenca();
+		this.historico = snapshot.getHistorico();
+		this.estado = snapshot.getEstado(); 
 	}	
 
 }
