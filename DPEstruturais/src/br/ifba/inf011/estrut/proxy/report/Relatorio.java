@@ -18,8 +18,8 @@ public class Relatorio {
 	public Relatorio() {
 		this.linhas = new ArrayList<Linha>();
 		this.categoria = new CategoriaServico();
-		this.servico = new ClienteServico();
-//		this.servico =  new ClienteProxy(new ClienteServico());		
+//		this.servico = new ClienteServico();
+		this.servico =  new ClienteProxy(new ClienteServico());		
 		
 	}
 	

@@ -1,9 +1,25 @@
-package br.ifba.inf011.estrut.proxy.servico;
+package br.ifba.inf011.estrut.flyweight.report;
 
 public class CategoriaDicionario {
 	
-	public static String getDescricao(char chCategoria) {
+	private static CategoriaDicionario categoriaDicionario;
+	public static int TOTAL_OBJETOS = 0;
+
+	
+	private CategoriaDicionario() {
+		
+	}
+	
+	public static CategoriaDicionario getCategoriaDicionario() {
+		if(categoriaDicionario == null)
+			categoriaDicionario = new CategoriaDicionario();
+		return categoriaDicionario;
+	}
+	
+	
+	public String getDescricao(char chCategoria) {
 		String descricao = null;
+		CategoriaDicionario.TOTAL_OBJETOS++;
 		switch(chCategoria) {
 			case 'A' : descricao = new String("Situação Ótima"); break;
 			case 'B' : descricao = new String("Alerta Azul"); break;
@@ -14,6 +30,5 @@ public class CategoriaDicionario {
 		}
 		return descricao;
 	}
-
 
 }

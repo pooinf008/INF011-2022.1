@@ -1,13 +1,12 @@
-package br.ifba.inf011.estrut.proxy;
+package br.ifba.inf011.estrut.flyweight;
 
-import br.ifba.inf011.estrut.proxy.adapter.LoggerAdapter;
-import br.ifba.inf011.estrut.proxy.adapter.LoggerStateChanged;
-import br.ifba.inf011.estrut.proxy.controlador.TipoControlador;
-import br.ifba.inf011.estrut.proxy.report.CategoriaServico;
-import br.ifba.inf011.estrut.proxy.servico.CategoriaDicionario;
-import br.ifba.inf011.estrut.proxy.servico.ClienteServico;
-import br.ifba.inf011.estrut.proxy.subscriber.FileLogStateChanged;
-import br.ifba.inf011.estrut.proxy.subscriber.SMSStateChanged;
+import br.ifba.inf011.estrut.flyweight.adapter.LoggerAdapter;
+import br.ifba.inf011.estrut.flyweight.adapter.LoggerStateChanged;
+import br.ifba.inf011.estrut.flyweight.controlador.TipoControlador;
+import br.ifba.inf011.estrut.flyweight.report.CategoriaServico;
+import br.ifba.inf011.estrut.flyweight.servico.ClienteServico;
+import br.ifba.inf011.estrut.flyweight.subscriber.FileLogStateChanged;
+import br.ifba.inf011.estrut.flyweight.subscriber.SMSStateChanged;
 
 public class Aplicacao {
 	
@@ -18,7 +17,7 @@ public class Aplicacao {
 		LoggerAdapter adapter = new LoggerAdapter(arq);
 		ClienteServico cliente = new ClienteServico();	
 		CategoriaServico categoria = new CategoriaServico();
-		ControleIF controle = new ControladorGenerico(3, 35.0, System.err);
+		ControleIF controle = new ControladorGenerico(3, 35.0, System.err, true);
 		AmbienteIF ambiente = this.criarAmbiente();
 
 		controle.addStateChangedListener(adapter);
@@ -42,7 +41,7 @@ public class Aplicacao {
 	
 		int i = 0;
 		
-		ControleIF controle = new ControladorGenerico(3, 35.0, System.err);
+		ControleIF controle = new ControladorGenerico(3, 35.0, System.err, false);
 		Sala ambiente = new Sala(27.0);
 		
 		while(controle.getEnergy() > 0 && i < 100) {
@@ -53,12 +52,11 @@ public class Aplicacao {
 		}
 		
 		System.out.println("\n\n\tRELATÓRIO");
-		System.out.println(controle.getRelatorio());
+		System.out.println(controle.getRelatorio().gerar());
 		
 		
 		System.out.println("\n\n\tResumo");
 		controle.printResumo(System.out);
-		
 	}
 	
 	public AmbienteIF criarAmbiente() {
