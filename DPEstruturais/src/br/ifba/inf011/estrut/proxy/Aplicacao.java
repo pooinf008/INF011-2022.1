@@ -3,7 +3,7 @@ package br.ifba.inf011.estrut.proxy;
 import br.ifba.inf011.estrut.proxy.adapter.LoggerAdapter;
 import br.ifba.inf011.estrut.proxy.adapter.LoggerStateChanged;
 import br.ifba.inf011.estrut.proxy.controlador.TipoControlador;
-import br.ifba.inf011.estrut.proxy.servico.CategoriaServico;
+import br.ifba.inf011.estrut.proxy.report.CategoriaServico;
 import br.ifba.inf011.estrut.proxy.servico.ClienteServico;
 import br.ifba.inf011.estrut.proxy.subscriber.FileLogStateChanged;
 import br.ifba.inf011.estrut.proxy.subscriber.SMSStateChanged;
@@ -12,7 +12,6 @@ public class Aplicacao {
 	
 	
 	public void rodar2() throws Exception{
-	
 		
 		LoggerStateChanged arq = new LoggerStateChanged("C:\\Users\\fredericojorge\\workspace\\log.txt");
 		LoggerAdapter adapter = new LoggerAdapter(arq);
@@ -20,7 +19,6 @@ public class Aplicacao {
 		CategoriaServico categoria = new CategoriaServico();
 		ControleIF controle = new ControladorGenerico(3, 35.0, System.err);
 		AmbienteIF ambiente = this.criarAmbiente();
-//		AmbienteIF ambiente = new Sala(27);		
 
 		controle.addStateChangedListener(adapter);
 		
@@ -41,31 +39,22 @@ public class Aplicacao {
 
 	public void rodar() throws Exception{
 	
+		int i = 0;
 		
 		ControleIF controle = new ControladorGenerico(3, 35.0, System.err);
 		Sala ambiente = new Sala(27.0);
 		
-		for(int i = 0; i < 5; i++) {
-			SMSStateChanged sms = new SMSStateChanged(i);
-			controle.addStateChangedListener(sms);
-			(new Thread()).start(); 
+		while(controle.getEnergy() > 0 && i < 100) {
+			ambiente.randomizar();
+			controle.controlar(ambiente);
+			i++;
+			Thread.sleep(10);
 		}
 		
+		System.out.println("\n\n\tRELATÓRIO");
+		System.out.println(controle.getRelatorio());
 		
-		while(controle.getEnergy() > 0) {
-			if(controle.getEnergy() > 50) {
-				ambiente.randomizar();
-				controle.controlar(ambiente);
-			}else {
-				controle.desligar();
-				controle.recarregar();
-				for(int i = 0; i < 50; i++)
-					controle.controlar(ambiente);
-				controle.ligar();
-				controle.ligar();
-				controle.ligar();
-			}
-		}
+		
 		System.out.println("\n\n\tResumo");
 		controle.printResumo(System.out);
 	}
@@ -101,7 +90,7 @@ public class Aplicacao {
 	
 	
 	public static void main(String[] args) throws Exception {
-		(new Aplicacao()).rodar2();
+		(new Aplicacao()).rodar();
 	}
 
 }

@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.StringTokenizer;
 
-public class ClienteServico {
+public class ClienteServico implements ServicoIF{
 
 	public String ask(char categoria) throws IOException {
 		Socket socket = new Socket("localhost", 123);

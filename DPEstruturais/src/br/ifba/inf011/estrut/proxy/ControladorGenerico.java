@@ -7,6 +7,7 @@ import java.util.List;
 import br.ifba.inf011.estrut.proxy.estados.ControladorState;
 import br.ifba.inf011.estrut.proxy.estados.OperacionalState;
 import br.ifba.inf011.estrut.proxy.estados.TipoEstado;
+import br.ifba.inf011.estrut.proxy.report.Relatorio;
 import br.ifba.inf011.estrut.proxy.util.Estatistica;
 
 public class ControladorGenerico implements ControleIF{
@@ -21,6 +22,7 @@ public class ControladorGenerico implements ControleIF{
 	private PrintStream log;
 	private ControladorState estado;
 	private double energy;	
+	private Relatorio relatorio;
 	
 	
 	private List<StateChangedListener> stateChangedListeners;
@@ -36,6 +38,7 @@ public class ControladorGenerico implements ControleIF{
 		this.estado = new OperacionalState();
 		this.energy = 100;
 		this.stateChangedListeners = new ArrayList<StateChangedListener>();
+		this.relatorio = new Relatorio();
 	}
 	
 	
@@ -56,11 +59,11 @@ public class ControladorGenerico implements ControleIF{
 		
 	    this.historico.add(temperatura);
 	    this.diferenca.add(Math.abs(delta));
+	    this.relatorio.addLinha(this.energy, this.setPoint, temperatura);
 	    this.energy -= this.estado.controlar(ambiente, this.ganho, this.setPoint, 
 	    						  this.historico, this.diferenca, this.log);
 	    this.energy = (this.energy > 100)? 100 : this.energy; 
 	}
-	
 	
 	public void printResumo(PrintStream log) {
 		Estatistica estatisticas = new Estatistica(this.historico);
@@ -103,6 +106,9 @@ public class ControladorGenerico implements ControleIF{
 		this.fireStateChangedNotify(atual.quemSouEu(), this.estado.quemSouEu());		
 	}
 	
+	public Relatorio getRelatorio() {
+		return this.relatorio;
+	}
 
 
 	@Override

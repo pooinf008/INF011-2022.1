@@ -11,7 +11,6 @@ public class Sala implements AmbienteIF{
 	}
 	
 	public double getTemperatura() {
-		System.out.println("\t\tSala");
 		return this.ultimaMedicao; 
 	}
 	

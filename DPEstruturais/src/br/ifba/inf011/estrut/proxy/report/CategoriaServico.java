@@ -1,4 +1,4 @@
-package br.ifba.inf011.estrut.proxy.servico;
+package br.ifba.inf011.estrut.proxy.report;
 
 public class CategoriaServico {
 	

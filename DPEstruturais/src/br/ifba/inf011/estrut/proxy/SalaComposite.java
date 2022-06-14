@@ -18,7 +18,6 @@ public class SalaComposite implements AmbienteIF{
 	
 	@Override
 	public double getTemperatura() {
-		System.out.println("COMPOSITE");
 		double tempMedia = 0;
 		for(AmbienteIF ambiente : this.ambientes)
 			tempMedia += ambiente.getTemperatura();
