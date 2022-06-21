@@ -1,16 +1,16 @@
-package br.ifba.inf011.estrut.decorator;
+package br.ifba.inf011.estrut.bridge;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ifba.inf011.estrut.decorator.report.RelatorioEstatico;
-import br.ifba.inf011.estrut.decorator.estados.ControladorState;
-import br.ifba.inf011.estrut.decorator.estados.OperacionalState;
-import br.ifba.inf011.estrut.decorator.estados.TipoEstado;
-import br.ifba.inf011.estrut.decorator.report.Relatorio;
-import br.ifba.inf011.estrut.decorator.report.RelatorioDinamico;
-import br.ifba.inf011.estrut.decorator.util.Estatistica;
+import br.ifba.inf011.estrut.bridge.estados.ControladorState;
+import br.ifba.inf011.estrut.bridge.estados.OperacionalState;
+import br.ifba.inf011.estrut.bridge.estados.TipoEstado;
+import br.ifba.inf011.estrut.bridge.report.ConsoleLogger;
+import br.ifba.inf011.estrut.bridge.report.RelatorioDigest;
+import br.ifba.inf011.estrut.bridge.report.RelatorioSimples;
+import br.ifba.inf011.estrut.bridge.util.Estatistica;
 
 public class ControladorGenerico implements ControleIF{
 	
@@ -24,7 +24,7 @@ public class ControladorGenerico implements ControleIF{
 	private PrintStream log;
 	private ControladorState estado;
 	private double energy;	
-	private Relatorio relatorio;
+	private RelatorioSimples relatorio;
 	
 	
 	private List<StateChangedListener> stateChangedListeners;
@@ -40,7 +40,7 @@ public class ControladorGenerico implements ControleIF{
 		this.estado = new OperacionalState();
 		this.energy = 100;
 		this.stateChangedListeners = new ArrayList<StateChangedListener>();
-		this.relatorio = new RelatorioDinamico();
+		this.relatorio = new RelatorioDigest(new ConsoleLogger());
 	}
 	
 	
@@ -108,8 +108,8 @@ public class ControladorGenerico implements ControleIF{
 		this.fireStateChangedNotify(atual.quemSouEu(), this.estado.quemSouEu());		
 	}
 	
-	public Relatorio getRelatorio() {
-		return this.relatorio;
+	public void doRelatorio() {
+		this.relatorio.makeReport();
 	}
 
 
